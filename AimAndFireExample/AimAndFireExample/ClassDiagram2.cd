@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AimAndFireExample.ChaseandFire" Collapsed="true">
+    <Position X="12" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEEAAAAAAAwAAAAAgAAAAAAAAAAgAAAAAAAAAAAQ=</HashCode>
+      <FileName>ChaseandFire.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AimAndFireExample.chaseAndFireEngine" Collapsed="true">
+    <Position X="13.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAAQBAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>chaseAndFireEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AimAndFireExample.Program" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.ChasingEnemy" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ChasingEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.CrossHair" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>CrossHair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.Enemy" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAACAAABAAAAAAAAAABAAAAAAQAAAAACAEAEA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.SimplePlayer" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAACAQAggAAAAAAAAAAEAIAAAAAAAAAAIEgAkA=</HashCode>
+      <FileName>MoreSimplePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.Player" Collapsed="true">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAiAQAggAAAAAAAAAAEAIAAAAAAAAACIEgAkA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.rocket" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAEAAAQgAAAAACBCAEAABCBAAABAACAAAAAEA=</HashCode>
+      <FileName>rocket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSprite.Sprite" Collapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CARAEAQAgAgAAgAAEAgAIAQgEAAARAAIAAQACAAQAIA=</HashCode>
+      <FileName>Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="AnimatedSprite.DIRECTION" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAgAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AnimatedSprite.PLAYERSTATE" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
