@@ -159,12 +159,12 @@ namespace AnimatedSprite
                 return radians;
             }
             
-            public override void Draw(SpriteBatch spriteBatch)
+            public override void Draw(Cameras.Camera2D cam,SpriteBatch spriteBatch)
             {
                 
-                base.Draw(spriteBatch);
+                base.Draw(cam,spriteBatch);
                 if (explosion.Visible)
-                    explosion.Draw(spriteBatch);
+                    explosion.Draw(cam, spriteBatch);
                 
 
             }

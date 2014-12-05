@@ -13,12 +13,11 @@ namespace AnimatedSprite
 
         public Platform(Game g, Texture2D texture, Vector2 pos, int fc ) : base(g,texture,pos,fc)
         {
-
         }
 
         public bool onTopofMe(Sprite p )
         {
-            if (p.BoundingBox.Bottom - this.BoundingBox.Top == 1)
+            if (this.BoundingBox.Intersects(p.BoundingBox) && p.BoundingBox.Bottom > this.BoundingBox.Top)
                 return true;
             return false;
         }

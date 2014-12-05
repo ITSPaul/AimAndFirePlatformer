@@ -122,12 +122,12 @@ namespace AnimatedSprite
             base.Update(gameTime);
         }
             
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-            Site.Draw(spriteBatch);
+            base.Draw(cam,spriteBatch);
+            Site.Draw(cam,spriteBatch);
             if (myRocket != null && myRocket.RocketState != rocket.ROCKETSTATE.STILL)
-                    myRocket.Draw(spriteBatch);
+                    myRocket.Draw(cam,spriteBatch);
             
         }
 

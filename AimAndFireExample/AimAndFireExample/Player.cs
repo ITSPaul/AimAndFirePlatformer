@@ -48,8 +48,8 @@ namespace AnimatedSprite
                 textureStates[(int)DIRECTION.JUMPING] = g.Content.Load<Texture2D>(@"Textures\Idle");
                 myGame = g;
                 Site = new CrossHair(g, g.Content.Load<Texture2D>(@"Textures\Rocketcrosshair"), userPosition, 1);
-                playerDirection = DIRECTION.STARTING;
-                playerSate = PLAYERSTATE.STANDING;
+                playerDirection = DIRECTION.JUMPING;
+                playerSate = PLAYERSTATE.FALLING;
             }
 
             public void loadRocket(rocket r)
@@ -153,11 +153,11 @@ namespace AnimatedSprite
             }
 
             // Make sure the player stays in the bounds see previous lab for details
-            position = Vector2.Clamp(position, Vector2.Zero,
-                                            new Vector2(gameScreen.Width - spriteWidth,
-                                                        gameScreen.Height - spriteHeight));
-            if (position.Y == gameScreen.Height - spriteHeight)
-                playerSate = PLAYERSTATE.STANDING;
+            //position = Vector2.Clamp(position, Vector2.Zero,
+            //                                new Vector2(gameScreen.Width - spriteWidth,
+            //                                            gameScreen.Height - spriteHeight));
+            //if (position.Y == gameScreen.Height - spriteHeight)
+            //    playerSate = PLAYERSTATE.STANDING;
             
             
             if (myRocket != null)
@@ -170,19 +170,42 @@ namespace AnimatedSprite
 
         }
 
-        public bool below(Platform p)
+        public bool imAbove(Platform p)
         {
-            if (this.BoundingBox.Bottom - p.BoundingBox.Top == 1)
+            if (this.BoundingBox.Intersects(p.BoundingBox) 
+                && this.BoundingBox.Bottom > p.BoundingBox.Top) 
                 return true;
             return false;
         }
-
-        public override void Draw(SpriteBatch spriteBatch)
+        
+        public bool imBelow(Platform p)
         {
-            base.Draw(spriteBatch);
-            Site.Draw(spriteBatch);
+            if (this.BoundingBox.Intersects(p.BoundingBox)
+                && this.BoundingBox.Top < p.BoundingBox.Bottom) 
+                    return true;
+            return false;
+        }
+
+        public bool imRightOf(Platform p)
+        {
+            if (this.BoundingBox.Intersects(p.BoundingBox)
+                && this.BoundingBox.Left > p.BoundingBox.Right)
+                return true;
+            return false;
+        }
+        public bool imLeftOf(Platform p)
+        {
+            if (this.BoundingBox.Intersects(p.BoundingBox)
+                && this.BoundingBox.Right < p.BoundingBox.Left)
+                return true;
+            return false;
+        }
+        public override void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
+        {
+            base.Draw(cam, spriteBatch);
+            Site.Draw(cam,spriteBatch);
             if (myRocket != null && myRocket.RocketState != rocket.ROCKETSTATE.STILL)
-                    myRocket.Draw(spriteBatch);
+                    myRocket.Draw(cam,spriteBatch);
             
         }
 

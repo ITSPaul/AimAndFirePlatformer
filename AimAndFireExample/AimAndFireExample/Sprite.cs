@@ -19,13 +19,14 @@ namespace AnimatedSprite
         protected float angleOfRotation;
         protected int spriteDepth = 1;
         protected SpriteEffects Effect = SpriteEffects.None;
-        protected Vector2 WorldOrigin
+        private bool _collidable = true;
+
+        protected bool Collidable
         {
-            get { return position + origin; }
-            
+            get { return _collidable; }
+            set { _collidable = value; }
         }
 
-        static protected Rectangle CameraRect;
         public bool Visible
         {
             get { return visible; }
@@ -83,7 +84,6 @@ namespace AnimatedSprite
             origin = new Vector2(spriteWidth / 2, spriteHeight / 2);
             angleOfRotation = 0;
             // Create a camera for clipping
-            CameraRect = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
             _boundingBox = new Rectangle((int)position.X, (int)position.Y, spriteWidth,spriteHeight);
         }
 
@@ -113,18 +113,22 @@ namespace AnimatedSprite
             }
         public bool collisionDetect(Sprite other)
         {
-            Rectangle myBound = new Rectangle((int)this.position.X, (int)this.position.Y, this.spriteWidth, this.spriteHeight);
-            Rectangle otherBound = new Rectangle((int)other.position.X, (int)other.position.Y, other.spriteWidth, other.spriteHeight);
-            if (myBound.Intersects(otherBound))
-                return true;
-            return false;
+            if (Collidable)
+            {
+                Rectangle myBound = new Rectangle((int)this.position.X, (int)this.position.Y, this.spriteWidth, this.spriteHeight);
+                Rectangle otherBound = new Rectangle((int)other.position.X, (int)other.position.Y, other.spriteWidth, other.spriteHeight);
+                if (myBound.Intersects(otherBound))
+                    return true;
+            }
+                return false;
+            
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
         {
             if (visible)
             {
-                spriteBatch.Begin();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, cam.Transform);
                 spriteBatch.Draw(spriteImage,
                     position, sourceRectangle,
                     Color.White, angleOfRotation, origin,

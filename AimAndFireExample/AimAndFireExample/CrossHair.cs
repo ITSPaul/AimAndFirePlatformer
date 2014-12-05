@@ -38,10 +38,10 @@ namespace AnimatedSprite
             base.Update(gametime);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
         {
 
-            base.Draw(spriteBatch);
+            base.Draw(cam, spriteBatch);
         }
     }
 }

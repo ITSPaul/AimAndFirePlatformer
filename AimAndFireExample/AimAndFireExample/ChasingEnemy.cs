@@ -36,7 +36,7 @@ namespace AnimatedSprite
         // if so it takes approproate action
             public bool inChaseZone(Player p)
             {
-                float distance = Math.Abs(Vector2.Distance(this.WorldOrigin, p.CentrePos));
+                float distance = Math.Abs(Vector2.Distance(this.position, p.CentrePos));
                 if (distance <= chaseRdaius)
                     return true;
                 return false;
