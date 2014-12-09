@@ -27,6 +27,13 @@ namespace Cameras
         protected KeyboardState _keyState;
         protected Int32 _scroll;
         bool _following;
+        private Rectangle _cameraExtent;
+
+        public Rectangle CameraExtent
+        {
+            get { return _cameraExtent; }
+            set { _cameraExtent = value; }
+        }
 
         public bool Following
         {
@@ -81,6 +88,7 @@ namespace Cameras
             _rotation = 0.0f;
             _pos = Vector2.Zero;
             _viewport = viewport;
+            CameraExtent = new Rectangle((int)_pos.X, (int)_pos.Y, _viewport.Width, _viewport.Height);
         }
 
         #endregion
@@ -104,6 +112,7 @@ namespace Cameras
                             Matrix.CreateTranslation(_pos.X, _pos.Y, 0);
             //Update inverse matrix
             _inverseTransform = Matrix.Invert(_transform);
+            CameraExtent = new Rectangle((int)_pos.X, (int)_pos.Y, _viewport.Width, _viewport.Height);
         }
 
         public void revert() { _rotation = 0f; }

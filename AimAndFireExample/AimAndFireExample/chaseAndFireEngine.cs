@@ -23,6 +23,7 @@ namespace AimAndFireExample
         Cameras.Camera2D cam;
         Game _game;
         private Platform[] platform1;
+        List<Platform> allBlocks = new List<Platform>();
 
         public chaseAndFireEngine(Game game)
         {
@@ -44,6 +45,7 @@ namespace AimAndFireExample
             {
                 floor[i] = new Platform(game,game.Content.Load<Texture2D>(@"Textures\Floor"),platformPos,1);
                 platformPos.X += floor[i].spriteWidth;
+                allBlocks.Add(floor[i]);
             }
 
             platformPos = new Vector2(400, 200);
@@ -51,6 +53,7 @@ namespace AimAndFireExample
             {
                 platform1[i] = new Platform(game, game.Content.Load<Texture2D>(@"Textures\Floor"), platformPos, 1);
                 platformPos.X += platform1[i].spriteWidth;
+                allBlocks.Add(platform1[i]);
             }
 
             player1.loadRocket(r);
@@ -70,18 +73,35 @@ namespace AimAndFireExample
 
             Vector2 oldPlayerPosition =  player1.position;
             player1.Update(gameTime);
-            
+                        
             foreach (Platform block in floor)
             {
-                if (block.onTopofMe(player1))
+                if (block.onTopofMe(player1)){
                     player1.playerSate = PLAYERSTATE.STANDING;
+                    break;
+                }
             }
 
             foreach (Platform block in platform1)
             {
-                if (block.onTopofMe(player1))
+                if (block.onTopofMe(player1)){
                     player1.playerSate = PLAYERSTATE.STANDING;
-            }    
+                    break;
+                }
+
+            }
+
+            // need to clip against camera extents
+            foreach (var block in allBlocks)
+            {
+                if (block.onTopofMe(player1))
+                {
+                    player1.playerSate = PLAYERSTATE.STANDING;
+                    break;
+                }
+                else player1.playerSate = PLAYERSTATE.FALLING;
+            }
+
             // chase enemy can only follow the player if they are alive
             if (chaser.EnemyState == Enemy.ENEMYSTATE.ALIVE)
                 chaser.follow(player1);

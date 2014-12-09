@@ -34,7 +34,17 @@ namespace AnimatedSprite
                 get { return position + new Vector2(spriteWidth/ 2, spriteHeight / 2); }
                 
             }
+            private Rectangle _playerExtent;
+            // used to keep the scope in focus
 
+            public Rectangle PlayerExtent
+            {
+                get
+                {
+                    return new Rectangle((int)position.X -200,(int)position.Y -200,400,400);
+                }
+                set { _playerExtent = value; }
+            }
             public DIRECTION playerDirection;
             public PLAYERSTATE playerSate;
         
@@ -67,21 +77,21 @@ namespace AnimatedSprite
             switch (playerSate)
             {
                 case PLAYERSTATE.FALLING:
-                    if (fallingTimer > 0)
-                    {
+                //    if (fallingTimer > 0)
+                //    {
                         this.position += new Vector2(0, 1) * playerVelocity;
                         if (Keyboard.GetState().IsKeyDown(Keys.D))
                             this.position += new Vector2(1, 0) * playerVelocity;
                         else if (Keyboard.GetState().IsKeyDown(Keys.A))
                             this.position += new Vector2(-1, 0) * playerVelocity;
                         playerSate = PLAYERSTATE.FALLING;
-                        fallingTimer -= gameTime.ElapsedGameTime.Milliseconds;
-                    }
-                    else
-                    {
-                        playerSate = PLAYERSTATE.STANDING;
-                        fallingTimer = MAXTIME;
-                    }
+                    //    fallingTimer -= gameTime.ElapsedGameTime.Milliseconds;
+                    //}
+                    //else
+                    //{
+                    //    playerSate = PLAYERSTATE.STANDING;
+                    //    fallingTimer = MAXTIME;
+                    //}
                     break;
 
                 case PLAYERSTATE.JUMPING:
@@ -140,6 +150,7 @@ namespace AnimatedSprite
             //myRocket.AngleOfRotation = angleOfRotation;
             // check for site change            
             Site.Update(gameTime);
+            Site.clamp(PlayerExtent);
             // Whenever the rocket is still and loaded it follows the player posiion
             if (myRocket != null && myRocket.RocketState == rocket.ROCKETSTATE.STILL)
                 myRocket.position = this.CentrePos;
@@ -147,6 +158,7 @@ namespace AnimatedSprite
             if (myRocket != null)
             {
                 // fire the rocket and it looks for the target
+            
                 if(PlayerRocket.RocketState == rocket.ROCKETSTATE.STILL 
                     &&  Keyboard.GetState().IsKeyDown(Keys.Space))
                     myRocket.fire(Site.position);

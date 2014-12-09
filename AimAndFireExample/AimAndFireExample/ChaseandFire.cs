@@ -24,6 +24,7 @@ namespace AimAndFireExample
         public ChaseandFire()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -38,6 +39,7 @@ namespace AimAndFireExample
             // TODO: Add your initialization logic here
             spriteBatch = new SpriteBatch(GraphicsDevice);
             CFE = new chaseAndFireEngine(this);
+            
             base.Initialize();
         }
 
