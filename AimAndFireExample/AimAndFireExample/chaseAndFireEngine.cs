@@ -29,7 +29,7 @@ namespace AimAndFireExample
         {
             _game = game;
             Vector2 centreScreen = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
-            player1 = new Player(game, game.Content.Load<Texture2D>(@"Textures\Idle"), centreScreen, 10);
+            player1 = new Player(game, game.Content.Load<Texture2D>(@"Textures\spr_stand_strip4"), centreScreen, 4);
             chaser = new ChasingEnemy(game, game.Content.Load<Texture2D>(@"Textures\PlayerDot"), new Vector2(200, 200), 2);
             Sprite explosion = new Sprite(game, game.Content.Load<Texture2D>(@"Textures\explodestrip"), Vector2.Zero, 8);
             rocket r = new rocket(game, game.Content.Load<Texture2D>(@"Textures\Rocket"), explosion, Vector2.Zero, 1);

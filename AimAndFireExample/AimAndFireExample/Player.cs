@@ -51,11 +51,10 @@ namespace AnimatedSprite
             public Player(Game g, Texture2D texture, Vector2 userPosition, int framecount) : base(g,texture,userPosition,framecount)
             {
                 textureStates = new Texture2D[(int)DIRECTION.STARTING + 1];
-
                 textureStates[(int)DIRECTION.STARTING] = texture;
-                textureStates[(int)DIRECTION.LEFT] = g.Content.Load<Texture2D>(@"Textures\RunLeft");
-                textureStates[(int)DIRECTION.RIGHT] = g.Content.Load<Texture2D>(@"Textures\RunRight");
-                textureStates[(int)DIRECTION.JUMPING] = g.Content.Load<Texture2D>(@"Textures\Idle");
+                textureStates[(int)DIRECTION.LEFT] = g.Content.Load<Texture2D>(@"Textures\spr_left_strip4");
+                textureStates[(int)DIRECTION.RIGHT] = g.Content.Load<Texture2D>(@"Textures\spr_right_strip4");
+                textureStates[(int)DIRECTION.JUMPING] = g.Content.Load<Texture2D>(@"Textures\spr_up_strip4");
                 myGame = g;
                 Site = new CrossHair(g, g.Content.Load<Texture2D>(@"Textures\Rocketcrosshair"), userPosition, 1);
                 playerDirection = DIRECTION.JUMPING;
