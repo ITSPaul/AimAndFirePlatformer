@@ -126,20 +126,20 @@ namespace Cameras
                 _zoom -= 0.1f;
                 _scroll = _mState.ScrollWheelValue;
             }
-            //Check rotation
-            if (_keyState.IsKeyDown(Keys.Left))
-            {
-                _rotation -= 0.1f;
-            }
-            if (_keyState.IsKeyDown(Keys.Right))
-            {
-                _rotation += 0.1f;
-            }
+            //Check rotation - no rotation allowed
+            //if (_keyState.IsKeyDown(Keys.Left))
+            //{
+            //    _rotation -= 0.1f;
+            //}
+            //if (_keyState.IsKeyDown(Keys.Right))
+            //{
+            //    _rotation += 0.1f;
+            //}
 
-            if (_keyState.IsKeyDown(Keys.R))
-            {
-                revert();
-            }
+            //if (_keyState.IsKeyDown(Keys.R))
+            //{
+            //    revert();
+            //}
 
 
             if (!Following)
