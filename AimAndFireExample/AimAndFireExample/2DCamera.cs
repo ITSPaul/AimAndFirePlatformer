@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-#region Version History (1.0)
-// 03.07.11 ~ Created
-#endregion
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using AnimatedSprite;
 
 namespace Cameras
 {
@@ -101,18 +98,20 @@ namespace Cameras
         public void Update()
         {
             //Call Camera Input
-            Input();
+            //Input();
             //Clamp zoom value
             _zoom = MathHelper.Clamp(_zoom, 0.0f, 10.0f);
             //Clamp rotation value
             _rotation = ClampAngle(_rotation);
             //Create view matrix
-            _transform = Matrix.CreateRotationZ(_rotation) *
+            _transform = Matrix.CreateTranslation(new Vector3(-Pos.X, -Pos.Y, 0)) * 
+                            Matrix.CreateRotationZ(_rotation) *
                             Matrix.CreateScale(new Vector3(_zoom, _zoom, 1)) *
-                            Matrix.CreateTranslation(_pos.X, _pos.Y, 0);
+                            Matrix.CreateTranslation(_viewport.Width * 0.5f, _viewport.Height * 0.5f, 0);
             //Update inverse matrix
             _inverseTransform = Matrix.Invert(_transform);
             CameraExtent = new Rectangle((int)_pos.X, (int)_pos.Y, _viewport.Width, _viewport.Height);
+            Point centre = CameraExtent.Center;
         }
 
         public void revert() { _rotation = 0f; }

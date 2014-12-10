@@ -17,8 +17,15 @@ namespace AnimatedSprite
             
             protected Texture2D[] textureStates;
             protected Game myGame;
-            protected float playerVelocity = 6.0f;
+            private float playerVelocity = 6.0f;
+
+            public float PlayerVelocity
+            {
+                get { return playerVelocity; }
+                set { playerVelocity = value; }
+            }
             private rocket myRocket;
+            SpriteFont message;
             
             public rocket PlayerRocket
             {
@@ -47,6 +54,8 @@ namespace AnimatedSprite
             }
             public DIRECTION playerDirection;
             public PLAYERSTATE playerSate;
+            private float jumpHeight = 5;
+            private Vector2 previousPosition;
         
             public Player(Game g, Texture2D texture, Vector2 userPosition, int framecount) : base(g,texture,userPosition,framecount)
             {
@@ -59,6 +68,8 @@ namespace AnimatedSprite
                 Site = new CrossHair(g, g.Content.Load<Texture2D>(@"Textures\Rocketcrosshair"), userPosition, 1);
                 playerDirection = DIRECTION.JUMPING;
                 playerSate = PLAYERSTATE.FALLING;
+
+                message = g.Content.Load<SpriteFont>("message");
             }
 
             public void loadRocket(rocket r)
@@ -78,11 +89,14 @@ namespace AnimatedSprite
                 case PLAYERSTATE.FALLING:
                 //    if (fallingTimer > 0)
                 //    {
+                        previousPosition = this.position;   
                         this.position += new Vector2(0, 1) * playerVelocity;
+
                         if (Keyboard.GetState().IsKeyDown(Keys.D))
                             this.position += new Vector2(1, 0) * playerVelocity;
                         else if (Keyboard.GetState().IsKeyDown(Keys.A))
                             this.position += new Vector2(-1, 0) * playerVelocity;
+                        
                         playerSate = PLAYERSTATE.FALLING;
                     //    fallingTimer -= gameTime.ElapsedGameTime.Milliseconds;
                     //}
@@ -94,21 +108,21 @@ namespace AnimatedSprite
                     break;
 
                 case PLAYERSTATE.JUMPING:
-                    if (JumpTime > 0)
-                    {
+                    //if (JumpTime > 0)
+                    //{
                         this.position += new Vector2(0, 1) * playerVelocity;
                         if (Keyboard.GetState().IsKeyDown(Keys.D))
                             this.position += new Vector2(1, 0) * playerVelocity;
                         else if (Keyboard.GetState().IsKeyDown(Keys.A))
                             this.position += new Vector2(-1, 0) * playerVelocity;
                         playerSate = PLAYERSTATE.FALLING;
-                        JumpTime -= gameTime.ElapsedGameTime.Milliseconds;
-                    }
-                    else
-                    {
-                        playerSate = PLAYERSTATE.FALLING;
-                        JumpTime = MAXTIME;
-                    }
+                      //  JumpTime -= gameTime.ElapsedGameTime.Milliseconds;
+                    //}
+                    //else
+                    //{
+                    //    playerSate = PLAYERSTATE.FALLING;
+                    //    JumpTime = MAXTIME;
+                    //}
                     break;
 
             }
@@ -129,7 +143,7 @@ namespace AnimatedSprite
             }
             else if (playerSate != PLAYERSTATE.JUMPING && Keyboard.GetState().IsKeyDown(Keys.W)) // one jump
             {
-                this.position += new Vector2(0, -1) * playerVelocity * 5;
+                this.position += new Vector2(0, -1) * playerVelocity * jumpHeight;
                 SpriteImage = textureStates[(int)DIRECTION.JUMPING];
                 playerDirection=DIRECTION.JUMPING;
                 playerSate = PLAYERSTATE.JUMPING;
@@ -149,7 +163,6 @@ namespace AnimatedSprite
             //myRocket.AngleOfRotation = angleOfRotation;
             // check for site change            
             Site.Update(gameTime);
-            Site.clamp(PlayerExtent);
             // Whenever the rocket is still and loaded it follows the player posiion
             if (myRocket != null && myRocket.RocketState == rocket.ROCKETSTATE.STILL)
                 myRocket.position = this.CentrePos;
@@ -213,10 +226,21 @@ namespace AnimatedSprite
         }
         public override void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
         {
+            
             base.Draw(cam, spriteBatch);
             Site.Draw(cam,spriteBatch);
             if (myRocket != null && myRocket.RocketState != rocket.ROCKETSTATE.STILL)
                     myRocket.Draw(cam,spriteBatch);
+            spriteBatch.Begin();
+            //spriteBatch.DrawString(message, "Cam "+  cam.Pos.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(message, "Player " + this.position.ToString(), new Vector2(10, 30), Color.White);
+            //spriteBatch.DrawString(message, "Cam via player " + (this.position - 
+                //new Vector2(game.GraphicsDevice.Viewport.Width/2,
+                //    game.GraphicsDevice.Viewport.Height/2)).ToString(),
+                //new Vector2(10, 50), Color.White);
+
+            spriteBatch.End();
+
             
         }
 

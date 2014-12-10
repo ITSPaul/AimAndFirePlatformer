@@ -25,6 +25,7 @@ namespace AnimatedSprite
 
         public override void Update(GameTime gametime)
         {
+            // not usable as mouse can go out of window
             MouseState ms = Mouse.GetState();
             previousPosition = position;
             if (ms.X != previousMouseSate.X && ms.Y != previousMouseSate.Y)
@@ -40,10 +41,10 @@ namespace AnimatedSprite
             //if (Keyboard.GetState().IsKeyDown(Keys.Down))
             //    this.position += new Vector2(0, 1) * CrossHairVelocity;
             
-            // Make sure the Cross Hair stays in the bounds see previous lab for details
-            //position = Vector2.Clamp(position, Vector2.Zero,
-            //                                new Vector2(gameScreen.Width - spriteWidth,
-            //                                            gameScreen.Height - spriteHeight));
+             //Make sure the Cross Hair stays in the bounds see previous lab for details
+            position = Vector2.Clamp(position, Vector2.Zero,
+                                            new Vector2(gameScreen.Width - spriteWidth,
+                                                        gameScreen.Height - spriteHeight));
             
             base.Update(gametime);
         }
@@ -56,7 +57,6 @@ namespace AnimatedSprite
 
         public override void Draw(Cameras.Camera2D cam, SpriteBatch spriteBatch)
         {
-            
             base.Draw(cam, spriteBatch);
         }
     }

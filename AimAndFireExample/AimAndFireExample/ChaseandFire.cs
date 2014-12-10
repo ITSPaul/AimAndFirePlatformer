@@ -24,7 +24,10 @@ namespace AimAndFireExample
         public ChaseandFire()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferMultiSampling = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
